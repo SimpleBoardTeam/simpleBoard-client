@@ -1,12 +1,36 @@
 import './App.css'
+import './Components/Navbar/Navbar'
+import NavBar from './Components/Navbar/Navbar';
 
-function App() {
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
+import MainPage from './Pages/MainPage/MainPage';'./Pages/MainPage/MainPage'
+
+
+function Layout() {
   return (
-    <h1 class="text-3xl font-bold">
-    Hello world!
-  </h1>
-  )
+    <>
+      <NavBar />
+      <Outlet />
+    </>
+  );
 }
 
-export default App
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />
+      },
+    ]
+  }
+])
+
+function App() {
+  return <RouterProvider router={router} />;
+}
+
+export default App;
